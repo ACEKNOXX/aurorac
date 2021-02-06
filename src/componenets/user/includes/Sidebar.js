@@ -23,25 +23,17 @@ export default function Sidebar() {
                     <li className="collection-item ">
                         <Link to="/admincourses" className="white-text">
                             <img src="assets/svg/courses_icon.svg" alt="" />
-                            <span className="title ">Course upload</span>
+                            <span className="title ">My Courses</span>
                             <Link to="" className="secondary-content">
                                 <img src="assets/svg/dot.svg" alt="" />
                             </Link>
                         </Link>
                     </li>
+                    
                     <li className="collection-item ">
-                        <Link to="/adminAdvert" className="white-text">
+                        <Link to="/" className="white-text">
                             <img src="assets/svg/person.svg" alt="" />
-                            <span className="title ">Adverts</span>
-                            <Link to="#!" className="secondary-content">
-                                <img src="assets/svg/dot.svg" alt="" />
-                            </Link>
-                        </Link>
-                    </li>
-                    <li className="collection-item ">
-                        <Link to="Https://t.me/twitwisavages " className="modal-trigger white-text">
-                            <img src="assets/svg/community.svg" alt="" />
-                            <span className="title ">Community</span>
+                            <span className="title ">My account</span>
                             <Link to="#!" className="secondary-content">
                                 <img src="assets/svg/dot.svg" alt="" />
                             </Link>
@@ -50,7 +42,7 @@ export default function Sidebar() {
                     <li className="collection-item ">
                         <Link to="/adminBlogPanel" className="modal-trigger white-text">
                             <img src="assets/svg/docs_sidebar.svg" alt="" />
-                            <span className="title ">Blog</span>
+                            <span className="title ">Community</span>
                             <Link to="" className="secondary-content">
                                 <img src="assets/svg/dot.svg" alt="" />
                             </Link>
@@ -60,19 +52,19 @@ export default function Sidebar() {
                     <img src="../assets/Aurora_icons/bin.svg" alt="" />
                 </ul>
             </div>
-                <div className="bg-primary dashboard-sidebar-footer " style={{height:"300px"}}>
-                    <ul className="collection">
-                        <li className="collection-item ">
-                            <Link  to="#logout"  className="modal-trigger white-text">
-                                <img src="assets/svg/logout.svg" alt="" />
-                                <span className="title tansparent-text p-2">Logout</span>
-                                <Link to="#!" className="secondary-content">
-                                    <img src="../assets/svg/dot.svg" alt="" />
-                                </Link>
+                    <div className="bg-primary dashboard-sidebar-footer " style={{height:"300px"}}>
+                <ul className="collection">
+                    <li className="collection-item ">
+                        <Link  to="#logout"  className="modal-trigger white-text">
+                            <img src="assets/svg/logout.svg" alt="" />
+                            <span className="title white-text p-2">Logout</span>
+                            <Link to="#!" className="secondary-content">
+                                <img src="../assets/svg/dot.svg" alt="" />
                             </Link>
-                        </li>
-                    </ul>
-                </div>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

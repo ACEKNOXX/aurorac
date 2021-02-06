@@ -3,8 +3,7 @@ import Sidebar from './../includes/Sidebar'
 import Header from './../includes/Header' 
 import Footer from './../includes/Footer'
 import TopHeader from './../includes/TopHeader'
-// import CourseTableRow from './../includes/widget/CourseTableRow'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import './../css/style.css'
 import './../css/style2.css'
 import AddCourse from './../modals/AddCourse'
@@ -17,7 +16,6 @@ export default function CourseUpload() {
 
     
     const handleChange = () => {
-        // console.log("descc",coursedesc.current.value)
         setCoursetitl(
             {
                 title: coursetitle.current.value,
@@ -87,7 +85,7 @@ export default function CourseUpload() {
                                     </div>
 
                                 </div>
-
+                               
                                 
                                 {/* <!-- main body --> */}
                             

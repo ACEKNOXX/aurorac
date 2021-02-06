@@ -1,30 +1,44 @@
 import React from 'react'
+import { Link} from 'react-router-dom'
+import DeleteCourse from './../../modals/DeleteCourse'
+import Button from '@material-ui/core/Button';
 
-export default function CourseTableRow() {
+export default function CourseTableRow(props) {
+
+    const corse = props.course
+    const course = corse.data()
+
+    console.log(course)
     return (
-        <tr className=" card-panel p-2">
-            <td>
-            
-                <p>
-                <label>
-                    <input type="checkbox" />
-                    <span>1</span>
-                </label>
-                </p>
-            </td>
-            <td>Financial marketing</td>
-            <td>Competently underwhelm strategic e-markets...</td>
-            <td>Emeka Doe</td>
-            <td>
-                <span>
-                    <button className="btn-flat transparent">
-                        <img src="assets/svg/bin.svg" alt="" />
-                    </button>
-                    <button className="btn-flat transparent">
-                        <img src="assets/svg/edit.svg" alt="" />
-                    </button>
-                </span>
-            </td>
-        </tr>
+
+            <tr >
+                <td>
+                    <p>
+                    <label>
+                        <DeleteCourse courseId={corse.id}/>
+                    </label>
+                    </p>
+                </td>
+                <td><b>{course.courseTitle}</b></td>
+                <td>{course.courseShortDescription.substring(0,30)}...</td>
+                <td>{course.courseTutor}</td>
+                <td>
+                    <span>
+                        <Button className="grey lighten-5" style={{margin:"0px 2px"}}>
+                            <Link to={`/adminAddCourseItem/${corse.id}`} className="red btn-flat transparent">
+                                {/* <img src="../assets/Aurora_icons/edit icon.svg" alt="" /> */}
+                                <i className="material-icons">add_circle</i>
+                            </Link>
+                        </Button>
+                        <Button className="grey lighten-5" style={{margin:"0px 2px"}}>
+                            <Link to={`/adminAddCourseItem/${corse.id}`} className=" btn-flat">
+                                <img src="../assets/Aurora_icons/edit icon.svg" alt="" />
+                            </Link>
+                        </Button>
+                        
+                    </span>
+                </td>
+            </tr>
+           
     )
 }

@@ -117,7 +117,7 @@ import React, { useRef,useState } from 'react'
 import {Link, useHistory } from 'react-router-dom';
 import Navbar from '../pages/includes/widgets/Navbar'
 import { useAuth } from './../../context/AuthContext'
-import app,{firestore} from './../../firebase'
+import app,{firestore,auth} from './../../firebase'
 import './../css/App.css'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -159,22 +159,34 @@ export default function Signup() {
             setError('')
             setLoading(true)
             // console.log(user.user.uid);
-            console.log("username",usernameRef.current.value);
-            console.log("email address", emailRef.current.value)
-            console.log("pass",passwordRef.current.value)
-            console.log("agagon")
+            // console.log("username",usernameRef.current.value);
+            // console.log("email address", emailRef.current.value)
+            // console.log("pass",passwordRef.current.value)
+            // console.log("agagon")
+            var name = usernameRef.current.value
+            var currentemail = emailRef.current.value
             var user= await signup(emailRef.current.value, passwordRef.current.value)
             
+            var userCurrent = auth.currentUser;
             
+                userCurrent.updateProfile({
+                displayName: name ,
+                photoURL: "https://example.com/jane-q-user/profile.jpg"
+                }).then(function() {
+                // Update successful.
+                    console.log("user details  Update successful")
+                }).catch(function(error) {
+                // An error happened.    
+                    console.log(error)
+                })
             // console.log(user.user.uid)
             var savedUser = await firestore.collection("users")
                 .doc(user.user.uid).set({
                     "uid":user.user.uid,
-                    "username": usernameRef.current.value,
-                    "email":emailRef.current.value
+                    "username":name,
+                    "email":currentemail
                 })
-            console.log(savedUser)
-            // history.push('/')
+            history.push('/user')
             
         }  catch (e) {
             console.log(e)
@@ -195,6 +207,9 @@ export default function Signup() {
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
                   <h4 className="center">Sign up</h4>
+        </DialogTitle>
+        <DialogContent>
+                  
             <div className="center">
                 <i className="material-icons medium center">account_circle</i>
             </div>
@@ -207,8 +222,6 @@ export default function Signup() {
                     </div>
                 </div>
             }
-        </DialogTitle>
-        <DialogContent>
           <DialogContentText className="center">
             Enjoy unlimited learning experience
           </DialogContentText>

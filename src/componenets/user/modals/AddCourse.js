@@ -1,23 +1,24 @@
 import React, { useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import {Link, useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
+import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import FormHelperText from '@material-ui/core/FormHelperText';
-// import FormControl from '@material-ui/core/FormControl';
-// import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { storage, firestore } from './../../../firebase'
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import VideocamIcon from '@material-ui/icons/Videocam';
 
 
 
@@ -78,7 +79,7 @@ export default function AddCourse(props) {
         setError("")
         // console.log(courseCategoryrRef.current.value)
         try {
-            await storage.ref(`CourseBanner/${courseBannerImage.name}`).put(courseBannerImage)
+            const upload = await storage.ref(`CourseBanner/${courseBannerImage.name}`).put(courseBannerImage)
             storage.ref(`CourseBanner/${courseBannerImage.name}`).getDownloadURL()
             .then(async (url) => {
                 // `url` is the download URL for 'images/stars.jpg'
@@ -138,13 +139,12 @@ export default function AddCourse(props) {
             fullScreen={fullScreen}
             open={open}
             onClose={handleClose}
-            scroll={"body"}
             aria-labelledby="responsive-dialog-title"
           >
         <form onSubmit={handleSubmit}>
                   
         <DialogTitle id="responsive-dialog-title">
-                      {"Add Course"}
+                      {"Use Google's location service?"}
             <div className="row">
                 <div className="col s12">
                     {error &&
@@ -256,7 +256,7 @@ export default function AddCourse(props) {
                     <Button type="submit" disabled={loading} 
                         id="submit-btn" className="mt-25 btn-large  col s12  btn-flat  ">
                         {loading &&
-                            <CircularProgress className="white-text" disableShrink  />
+                            <CircularProgress className="green-text" disableShrink  />
                         }
                         {!loading &&
                             <span className="white-text">

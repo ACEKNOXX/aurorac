@@ -19,6 +19,8 @@ import Adverts from './admin/pages/Adverts'
 import RichTextBox from './util/RIchText'
 import AdminBlogPanel from './admin/pages/Blog'
 import AddBlogArticle from './admin/pages/AddBlogArticle.js'
+import PrivateRoute from './util/PrivateRoute'
+import AddCourseItem from './admin/pages/AddCourseItem'
 
 
 class App extends Component{
@@ -29,15 +31,16 @@ class App extends Component{
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
-            <Route path='/user' component={UserHome} />
-            <Route path='/admin' component={AdminHome} />
-            <Route path="/admincourses" component={Courses} />
-            <Route path="/admincourseUpload" component={CoursesUpload} />
-            <Route path="/adminAdvert" component={Adverts} />
-            <Route path="/adminBlogPanel" component={AdminBlogPanel} />
-            <Route path="/adminAddBlogArticle" component={AddBlogArticle} />
             <Route path="/login" component={Login} />
-            <Route path='/richtext' component={RichTextBox} />
+            <PrivateRoute path='/user' component={UserHome} />
+            <PrivateRoute path='/admin' component={AdminHome} />
+            <PrivateRoute path="/admincourses" component={Courses} />
+            <PrivateRoute path="/admincourseUpload" component={CoursesUpload} />
+            <PrivateRoute path="/adminAdvert" component={Adverts} />
+            <PrivateRoute path="/adminBlogPanel" component={AdminBlogPanel} />
+            <PrivateRoute path="/adminAddBlogArticle" component={AddBlogArticle} />
+            <PrivateRoute path="/adminAddCourseItem/:id" component={AddCourseItem} />
+            <PrivateRoute path='/richtext' component={RichTextBox} />
           </Switch>
         </AuthProvider>
       </Router>
@@ -48,16 +51,3 @@ class App extends Component{
 export default App;
 
 
-// function App() {
-//   return (
-//     <Router>
-//       <AuthProvider>
-//         <Switch>
-//           <Route exact path="/" component={Home}/>
-//         </Switch>
-//       </AuthProvider>
-
-//     </Router>
-//   );
-// }
-// export default App;

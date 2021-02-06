@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// import {Link, useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 // import DialogActions from '@material-ui/core/DialogActions';
@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // import FormControl from '@material-ui/core/FormControl';
 // import Select from '@material-ui/core/Select';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { storage, firestore } from './../../../firebase'
+import { storage, firestore } from '../../../firebase'
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
@@ -39,26 +39,22 @@ selectEmpty: {
 },
 }));
 
-export default function AddCourse(props) {
-    const history = useHistory()
-    const courserPryDetails=props.courseDetails
-    
-    // console.log("desc", courserPryDetails)
-    var courseTitle;
-    var courseDesc;
-    if (props.courseDetails==null) {
+export default function AddCourseVideoButton(props) {
+    const courseId=props.courseId
+    console.log("coourseId==", courseId)
+    var courseDocId;
+    if (props.courseId==null) {
         console.log("omom we  get null data")
     } else {
-        courseTitle = courserPryDetails.title
-        courseDesc = courserPryDetails.desc
+        courseDocId = courseId
     }
-    const courseCategoryrRef = useRef(null)
-    const courseDurationRef = useRef(null)
-    const courseShortDescriptionRef = useRef(null)
-    const courseTutorRef = useRef(null)
+    const [scroll, setScroll] = React.useState('body');
+    const lessonTitleRef = useRef(null)
+    const lessonDurationRef = useRef(null)
+    const lessonShortDescriptionRef = useRef(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [courseBannerImage, setCourseBannerImage] = useState(null)
+    const [lessonVideo, setLessonVideo] = useState(null)
 
     //handleChange section starts here
     const handleChange = (e) => {
@@ -67,7 +63,7 @@ export default function AddCourse(props) {
             console.log(e.target.files[0].name)
             console.log(e.target.files)
             // setMediapath(e.target.files[0].name)
-            setCourseBannerImage(e.target.files[0])
+            setLessonVideo(e.target.files[0])
         }
     }
     // handleChange ends here
@@ -76,36 +72,37 @@ export default function AddCourse(props) {
         e.preventDefault();
         setLoading(true)
         setError("")
-        // console.log(courseCategoryrRef.current.value)
+        
+        console.log(lessonTitleRef.current.value, lessonDurationRef.current.value, lessonShortDescriptionRef.current.value)
+
         try {
-            await storage.ref(`CourseBanner/${courseBannerImage.name}`).put(courseBannerImage)
-            storage.ref(`CourseBanner/${courseBannerImage.name}`).getDownloadURL()
+            await storage.ref(`CourseLessonVideos/${lessonVideo.name}`).put(lessonVideo)
+            storage.ref(`CourseLessonVideos/${lessonVideo.name}`).getDownloadURL()
             .then(async (url) => {
                 // `url` is the download URL for 'images/stars.jpg'
                 console.log("url", url)
                 console.log("gre")
                 
-
+                var title = lessonTitleRef.current.value
+                var duration = lessonDurationRef.current.value
+                var shortDesc = lessonShortDescriptionRef.current.value
                 const dataToPush = {
-                    "courseBannerImageUrl": url,
-                    "courseTitle": courseTitle,
-                    "courseDescription": courseDesc,
-                    "courseDuration": courseDurationRef.current.value,
-                    "courseCategory": courseCategoryrRef.current.value,
-                    "courseShortDescription": courseShortDescriptionRef.current.value,
-                    "courseTutor": courseTutorRef.current.value
+                    "lessonVideoUrl": url,
+                    "lessonTitle": title,
+                    "courseDuration": duration,
+                    "courseShortDescription":shortDesc,
                 };
-                console.log(dataToPush)
+                // console.log(dataToPush)
 
-                await firestore.collection('courses').doc().set(dataToPush)
+                // await firestore.collection('courses').doc().set(dataToPush)
                 //  history.push('/admincourseUpload')
+                await firestore.collection('courses').doc(courseDocId)
+                .collection('courseLessons').doc().set(dataToPush);
             })
-            .catch((error) => {
-                // Handle any errors
-                // setError(error)
-                console.log(error)
+            .catch((e) => {
+                
+                console.log(e.message)
             })
-            // alert("xk")
             
             
         } catch (error) {
@@ -130,9 +127,14 @@ export default function AddCourse(props) {
 
   return (
     <div>
-        <Button variant="outlined" className="col s12 btn-large btn-flat btn-primary green-text"
+        {/* <Button variant="outlined" className="col s12 btn-large btn-flat btn-primary green-text"
               onClick={handleClickOpen}>
-            Add Course
+              Add Course
+        </Button> */}
+        <Button onClick={handleClickOpen} type="button"  className="mt-25 btn-large green col s6">
+                <span className="white-text">
+                    <i className="material-icons">add</i>
+                </span>    
         </Button>
         <Dialog
             fullScreen={fullScreen}
@@ -140,11 +142,13 @@ export default function AddCourse(props) {
             onClose={handleClose}
             scroll={"body"}
             aria-labelledby="responsive-dialog-title"
+            // aria-labelledby="scroll-dialog-title"
+            aria-describedby="scroll-dialog-description"  
           >
         <form onSubmit={handleSubmit}>
                   
         <DialogTitle id="responsive-dialog-title">
-                      {"Add Course"}
+                      {"Add Course Video"}
             <div className="row">
                 <div className="col s12">
                     {error &&
@@ -159,20 +163,12 @@ export default function AddCourse(props) {
         </DialogTitle>
         <DialogContent>
             <div className="row">
-                <div className="col s12 m6">
+                
+                <div className="col s12">
                     <div className="form-section-1 row">
                         <div className=" col s12" >
-                            <label  className="col s12 grey-text">Course Category</label>
-                            <input className="col s12 mt-50 full-w" ref={courseCategoryrRef}  placeholder="File name" type="text" required/>
-
-                        </div>
-                    </div>
-                </div>
-                <div className="col s12 m6">
-                    <div className="form-section-1 row">
-                        <div className=" col s12" >
-                            <label  className="col s12 grey-text">Tutor name</label>
-                            <input className="col s12 mt-50 full-w" ref={courseTutorRef} placeholder="Tutor name" type="text" required/>
+                            <label  className="col s12 grey-text">Lesson Title</label>
+                            <input className="col s12 mt-50 full-w" ref={lessonTitleRef} placeholder="Tutor name" type="text" required/>
                         
                         </div>
                     </div>
@@ -187,7 +183,7 @@ export default function AddCourse(props) {
                             <div className="form-section-1 row">
                                 <div className=" col s12" >
                                     <label htmlFor="email" className="col s12 grey-text">Duration</label>
-                                              <input className="col s12 mt-50 full-w" ref={courseDurationRef} placeholder=""
+                                              <input className="col s12 mt-50 full-w" ref={lessonDurationRef} placeholder=""
                                                   type="text" required/>
                                 </div>
                             </div>
@@ -198,7 +194,7 @@ export default function AddCourse(props) {
                     <div className="form-section-1 row">
                         <div className=" col s12" >
                             <label htmlFor="email" className="col s12 grey-text">Short Description</label>
-                            <input className="col s12 mt-50 full-w" ref={courseShortDescriptionRef}   placeholder="short description" type="text" required/>
+                            <input className="col s12 mt-50 full-w" ref={lessonShortDescriptionRef}   placeholder="short description" type="text" required/>
                         
                         </div>
                     </div>
@@ -217,14 +213,14 @@ export default function AddCourse(props) {
                             <input type="file" />
                         </div>
                         <div className="file-path-wrapper ">
-                                      {courseBannerImage &&
+                                      {lessonVideo &&
                                         <p className="center">
-                                              {courseBannerImage.name}
+                                              {lessonVideo.name}
                                         </p>
                                       }
                                       
                             <input
-                                accept="image/*"
+                                accept="video/*"
                                 className={classes.input}
                                 id="contained-button-file-image"
                                 type="file"
@@ -235,7 +231,7 @@ export default function AddCourse(props) {
                                 <Button disableElevation variant="contained" className=" grey-text" component="span" style={{
                                     marginRight:"10px"
                                 }}>
-                                Pick Banner Image
+                                Pick Media file
                                 <IconButton className="white-text" aria-label="upload picture" component="span">
                                     <PhotoCamera />
                                 </IconButton>
@@ -256,7 +252,7 @@ export default function AddCourse(props) {
                     <Button type="submit" disabled={loading} 
                         id="submit-btn" className="mt-25 btn-large  col s12  btn-flat  ">
                         {loading &&
-                            <CircularProgress className="white-text" disableShrink  />
+                            <CircularProgress className="green-text" disableShrink  />
                         }
                         {!loading &&
                             <span className="white-text">

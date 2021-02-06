@@ -24,7 +24,7 @@ render() {
     return (
         <div>
             <form onSubmit={this.handleSubmit}>
-            <div className="container">
+            {/* <div className="container"> */}
                 <div className="form-section-1">
                     <div className=" col s12" >
                         <label  className="col s12 grey-text">Article author</label>
@@ -37,7 +37,7 @@ render() {
                         
                     </div>
                 </div>    
-            </div>
+            {/* </div> */}
             <Editor
                 initialValue="<p>This is the initial content of the editor</p>"
                 init={{
