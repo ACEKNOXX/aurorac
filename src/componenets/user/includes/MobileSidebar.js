@@ -11,10 +11,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Icon from '@material-ui/core/Icon';
-import Login from "./../../../auth/Login";
-import Signup from './../../../auth/Signup'
+import Login from "./../../auth/Login";
+import Signup from './../../auth/Signup'
 import { Link} from 'react-router-dom'
-import { useAuth } from './../../../../context/AuthContext'
+import { useAuth } from './../../../context/AuthContext'
 
 
 const useStyles = makeStyles({
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Sidebar() {
+export default function MobileSidebar() {
   const { currentUser, logout,refresh } = useAuth();
 
   const classes = useStyles();
@@ -78,26 +78,22 @@ export default function Sidebar() {
             <ListItemText primary={'Home'} />
           </Link>
         </ListItem>
-        <ListItem button key={'Explore'}>
+        <ListItem button key={'My Courses'}>
           <Link to="/explore" className="black-text">
-            <ListItemText primary={'Explore'} />
+            <ListItemText primary={'My Courses'} />
           </Link>
         </ListItem>
-        <ListItem button key={'Blog'}>
+        <ListItem button key={'My Account'}>
           <Link to="/blog" className="black-text">
-            <ListItemText primary={'Blog'} />
+            <ListItemText primary={'My Account'} />
           </Link>
         </ListItem>
-        <ListItem button key={'About'}>
+        <ListItem button key={'Community'}>
           <Link to="/about" className="black-text">
-            <ListItemText primary={'About'} />
+            <ListItemText primary={'Community'} />
           </Link>
         </ListItem>
-        <ListItem button key={'Contact'}>
-          <Link to="/contact" className="black-text">
-            <ListItemText primary={'Contact'} />
-          </Link>
-        </ListItem>
+        
       </List>
       <Divider />
       <List>
@@ -117,7 +113,7 @@ export default function Sidebar() {
         <React.Fragment key={'left'}>
           <button type="button" className="btn-flat center"
             onClick={toggleDrawer('left', true)}><Icon>menu</Icon></button>
-          <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
+          <Drawer   anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
             {list('left')}
           </Drawer>
         </React.Fragment>

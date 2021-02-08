@@ -8,6 +8,12 @@ import { useAuth } from './../../context/AuthContext'
 import { makeStyles } from '@material-ui/core/styles';
 import AboutCeo from './includes/components/AboutCeo'
 import Footer from './includes/widgets/Footer'
+import Feedback from './includes/components/Feedback'
+import HowItWorks from './includes/components/HowItWorks'
+import DashboardSnippet from './includes/components/DashboardSnippet'
+import LittleAbout from './includes/components/LittleAbout'
+import PopularCourses from './includes/components/PopularCourses'
+
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 4,
@@ -36,7 +42,12 @@ export default function Home() {
             </Backdrop>
             <Navbar />
             <IndexBanner />
+            <PopularCourses />
+            <HowItWorks />
+            <DashboardSnippet />
+            <LittleAbout />
             <AboutCeo />
+            <Feedback />
             <Footer />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         </div>

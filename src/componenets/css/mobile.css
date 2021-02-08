@@ -13,6 +13,24 @@
     /* border:2px dashed red; */
     width:250px;
 }
+.learn-online{
+    /* border:2px dashed red; */
+    margin-bottom:0px !important;
+}
+.footer>.container{
+    width:98%;
+}
+.container{
+    max-width:97% !important;
+    /* border:2px dashed red !important; */
+    padding-bottom:20px;
+}
+
+.section-heading{
+width:300px;
+    /* border:2px dashed yellow; */
+    margin-left:-100px;
+}
 .banner-single-course #card-info-right{
     background: url("./../../assets/Aurora_images/Courses\ card\ image-min.png");
     background-repeat: no-repeat;

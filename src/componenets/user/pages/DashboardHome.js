@@ -1,6 +1,7 @@
 import React from 'react'
 import app, { firestore } from './../../../firebase'
 import PaystackBtn from './../modals/PaystackBtn'
+import RecentActivity from './../includes/widget/RecentActivity'
 
 export default function DashboardHome(props) {
     const user = props.user
@@ -65,6 +66,15 @@ export default function DashboardHome(props) {
                     </div>
                 </div>
             </div>
+            <div className="row">
+                <div className="col s12 ">
+                    <p className="latest-activity-title">
+                        LATEST ACTIVITY
+                    </p>
+                </div>
+            </div>
+            <RecentActivity />
+
         </div>
     )
 }

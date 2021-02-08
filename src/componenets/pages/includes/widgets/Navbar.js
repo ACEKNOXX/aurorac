@@ -50,7 +50,7 @@ const Navbar = () => {
                         </div>
                     </li>
                     <li>
-                        <Link to="/"  className="grey-text text-darken-3">Explore</Link>
+                        <Link to="/explore"  className="grey-text text-darken-3">Explore</Link>
                     </li>
                     <li>
                         <Link to="/" className="grey-text text-darken-3">Blog</Link>
@@ -59,7 +59,7 @@ const Navbar = () => {
                         <Link to="/" className="grey-text text-darken-3">Community</Link>
                     </li>
                     <li>
-                        <Link to="/" className="grey-text text-darken-3">About Us</Link>
+                        <Link to="/about" className="grey-text text-darken-3">About Us</Link>
                     </li>
                     <li>
                         <Link to="#modal-pricing"  className="grey-text text-darken-3  modal-trigger">Pricing calculator</Link>
@@ -77,22 +77,7 @@ const Navbar = () => {
                         <Login />
                     </li>
                     }
-                    {/* { !currentUser && 
-                        <li className="">
-                            <Link to="#modal1" data-target="modal1"
-                                className=" grey-text text-darken-3   modal-trigger">Login
-                            </Link>
-                        </li>
-                    }
-                     */}
                     
-                    {/* {!currentUser && 
-                        <li className="right">
-                            <Link to="/signup" className="btn-flat btn-primary btn-oultine  transparent  modal-trigger">
-                                    Register
-                                </Link>
-                        </li>
-                    } */}
                     
                     {!currentUser &&
                         <li className="right" style={{

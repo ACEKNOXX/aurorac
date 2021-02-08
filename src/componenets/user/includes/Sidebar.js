@@ -21,7 +21,7 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li className="collection-item ">
-                        <Link to="/admincourses" className="white-text">
+                        <Link to="/userMyCourses" className="white-text">
                             <img src="assets/svg/courses_icon.svg" alt="" />
                             <span className="title ">My Courses</span>
                             <Link to="" className="secondary-content">
@@ -31,7 +31,7 @@ export default function Sidebar() {
                     </li>
                     
                     <li className="collection-item ">
-                        <Link to="/" className="white-text">
+                        <Link to="/userProfile" className="white-text">
                             <img src="assets/svg/person.svg" alt="" />
                             <span className="title ">My account</span>
                             <Link to="#!" className="secondary-content">

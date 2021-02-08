@@ -21,7 +21,10 @@ import AdminBlogPanel from './admin/pages/Blog'
 import AddBlogArticle from './admin/pages/AddBlogArticle.js'
 import PrivateRoute from './util/PrivateRoute'
 import AddCourseItem from './admin/pages/AddCourseItem'
-
+import Explore from './pages/Explore'
+import About from './pages/About'
+import MyCourses from './user/pages/MyCourses'
+import NyProfile from './user/pages/MyProfile'
 
 class App extends Component{
   render(){
@@ -32,7 +35,11 @@ class App extends Component{
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
+            <Route path="/explore" component={Explore} />
+            <Route path="/about" component={About} />
             <PrivateRoute path='/user' component={UserHome} />
+            <PrivateRoute path='/userMyCourses' component={MyCourses} />
+            <PrivateRoute path="/userProfile" component={NyProfile}/>
             <PrivateRoute path='/admin' component={AdminHome} />
             <PrivateRoute path="/admincourses" component={Courses} />
             <PrivateRoute path="/admincourseUpload" component={CoursesUpload} />

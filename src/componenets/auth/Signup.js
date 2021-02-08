@@ -1,118 +1,3 @@
-// import React, { useRef,useState } from 'react'
-// import {Link, useHistory } from 'react-router-dom';
-// import Navbar from '../pages/includes/widgets/Navbar'
-// import { useAuth } from './../../context/AuthContext'
-// import './../css/App.css'
-
-// export default function Signup() {
-//     const usernameRef = useRef(null);
-//     const emailRef = useRef(null);
-//     const passwordRef = useRef(null);
-//     const { signup,firebaseC} = useAuth();
-//     // error state below
-//     const [error, setError] = useState('')
-//     const [loading, setLoading] = useState(false)
-//     const history = useHistory()
-
-//     const handleSubmit = async(e) => {
-//         e.preventDefault();
-        
-//         // alert(passwordRef.current.value);
-        
-//         if (passwordRef.current.value.length < 6 ) {
-//             return setError('Password should be atleast 6 chars')
-//         }
-        
-//         try {
-//             setError('')
-//             setLoading(true)
-//             var user= await signup(emailRef.current.value, passwordRef.current.value)
-//             console.log(user.user.uid);
-//             var dataToPush = {
-//                 "username": usernameRef.current.value,
-//                 "email":emailRef.current.value
-//             }
-//             await firebaseC("user",user.user.uid,dataToPush);
-//             history.push('/')
-            
-//         }  catch (e) {
-//             console.log(e)
-//             let errMsg = e.message;
-//             setError(errMsg)
-//         }
-//         setLoading(false)
-//     }
-//     return (
-//         <div>
-//             <Navbar />
-//              <div className="row" style={{
-//                 width:"100% !important",
-//             }}>
-//                 <div className="col s12 m5" >
-                    
-//                     <div className="center">
-//                         <i className="material-icons medium center">account_circle</i>
-//                     </div>
-//                     <div className="row container">
-                        
-                        
-//                         <div className="col s12">
-//                              {error &&
-//                                 <div className="row alert-err" style={{ padding: "16px" }} >
-//                                     <span className="white-text  mt-25" >
-//                                         {error}
-//                                     </span>
-//                                 </div>
-//                             }
-//                         </div>
-//                         <div className="col s12">
-//                             <form  onSubmit={handleSubmit}>
-//                             <div className="form-section-1 container mt-25 row">
-//                                 <div className=" col s12" >
-//                                     <label htmlFor="username" className="col s12 grey-text">Username</label>
-//                                     <input id="username" className="col s12 mt-50 ful l-w" placeholder="username" ref={usernameRef} type="text" required/>
-//                                 </div>
-//                             </div>
-//                             <div className="form-section-1 container mt-25 row">
-//                                 <div className=" col s12" >
-//                                     <label htmlFor="email" className="col s12 grey-text">Email Address</label>
-//                                     <input id="email" className="col s12 mt-50 ful l-w" placeholder="email address" ref={emailRef} type="email" required/>
-//                                 </div>
-//                             </div>
-                           
-//                             <div className="form-section-1 container mt-50 row">
-//                                 <div className=" col s12" >
-//                                     <label htmlFor="pass" className="col s12 grey-text">Password</label>
-//                                     <input  className="col s12 mt-50 full-w" id="pass" placeholder="password" ref={passwordRef} type="password" required/>
-                                
-//                                 </div>
-//                             </div>
-//                             <div className="row mt-25">
-//                                 <div className="col s1"></div>    
-//                                     <button disabled={loading} type="submit" style={{ marginLeft: "5px" }}
-//                                         className="col s10 btn-large btn-flat btn-large-primary white-text green" >
-//                                         Register
-//                                 </button>
-//                             </div>
-//                             <div className="col s12 center">
-//                                 <p>I already have an account ? <Link to="/">Login</Link> </p>
-//                             </div>
-                            
-//                             </form>
-//                         </div>
-//                     </div>
-
-//                 </div>
-//                 <div className="col s12 m7 signUpHero" style={{padding:"0px !important"}}>
-//                     <div className="grey darken-4" style={{height:"600px",opacity:"0.8"}}></div>
-//                 </div>
-//             </div>
-//         </div>
-        
-
-//     )
-// }
-
 import React, { useRef,useState } from 'react'
 import {Link, useHistory } from 'react-router-dom';
 import Navbar from '../pages/includes/widgets/Navbar'
@@ -168,10 +53,12 @@ export default function Signup() {
             var user= await signup(emailRef.current.value, passwordRef.current.value)
             
             var userCurrent = auth.currentUser;
-            
+                console.log(userCurrent)
+
+
                 userCurrent.updateProfile({
-                displayName: name ,
-                photoURL: "https://example.com/jane-q-user/profile.jpg"
+                    displayName: name ,
+                    // photoURL: "https://example.com/jane-q-user/profile.jpg"
                 }).then(function() {
                 // Update successful.
                     console.log("user details  Update successful")
@@ -183,7 +70,7 @@ export default function Signup() {
             var savedUser = await firestore.collection("users")
                 .doc(user.user.uid).set({
                     "uid":user.user.uid,
-                    "username":name,
+                    "displayName":name,
                     "email":currentemail
                 })
             history.push('/user')
@@ -204,11 +91,12 @@ export default function Signup() {
         }} onClick={handleClickOpen}>
         SignUp
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            
+      <Dialog open={open} onClose={handleClose} scroll={"body"}  aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
                   <h4 className="center">Sign up</h4>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent style={{width:"100% !important"}}>
                   
             <div className="center">
                 <i className="material-icons medium center">account_circle</i>

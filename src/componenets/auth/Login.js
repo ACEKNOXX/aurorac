@@ -15,13 +15,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function Login() {
 
-  const [open, setOpen] = React.useState(false);
+  const [openn, setOpenn] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenn(true);
   };
   const handleClose = () => {
-    setOpen(false);
+    setOpenn(false);
   };
 
     const emailRef = useRef(null);
@@ -59,7 +59,8 @@ export default function Login() {
       <Button variant="outlined" className="right btn-flat btn-primary green darken-4   white-text"  onClick={handleClickOpen}>
         Login
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+
+      <Dialog open={openn} onClose={handleClose} scroll={'body'} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
           <h4 className="center">Welcome back !</h4>
         </DialogTitle>

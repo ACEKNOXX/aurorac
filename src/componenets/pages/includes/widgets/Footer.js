@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link} from 'react-router-dom'
+import Subscribe from './Subscribe'
+
 
 export default function Footer() {
     return (
@@ -10,18 +12,8 @@ export default function Footer() {
                 <img className="mt-50" src="assets/logos/logo white version.svg" alt="" />
                 </div>
                 <div className="col s12 mt-50 show-on-medium-and-down hide-on-med-and-up">
-                    <h6 className="white-text" style={{fontSize:"22px"}}> Subscribe to mailing list </h6>
-                    <input className="subscibe-input mt-50" placeholder="Email address" type="text"
-                    style={{
-                        fontSize:"15px !important",
-                        border:"1px solid #eee",
-                        width:"250px",
-                        padding:"2px 8px",borderRadius:"5px",color:"#eee !important"
-                    }}
-                    />
-                    <button className="btn-flat btn-primary transparent waves-effect waves-light btn modal-trigger"
-                                style={{ height: "45px", borderRadius: "8px" }}>
-                                Subcribe now !</button>
+                    <h6 className="white-text" style={{ fontSize: "22px" }}> Subscribe to mailing list </h6>
+                    <Subscribe />    
                 
                 
                 </div>
@@ -30,10 +22,10 @@ export default function Footer() {
                     <div className="col s12 m4">
                         <h6 className="white-text" style={{fontSize:"25px"}}> <b>Quick links</b>  </h6>
                         <div className="mt-25 footer-nav">
-                            <Link to="/ndex.php" className="white-text"><h6>Home</h6> </Link>
-                            <Link to="/xplore.php" className="white-text"><h6>Explore</h6> </Link>
+                            <Link to="/" className="white-text"><h6>Home</h6> </Link>
+                            <Link to="/explore" className="white-text"><h6>Explore</h6> </Link>
                             <Link to="/" className="white-text"><h6>Community</h6> </Link>
-                            <Link to="/bout.php" className="white-text"><h6>About Us</h6> </Link>
+                            <Link to="" className="white-text"><h6>About Us</h6> </Link>
                         </div>
                     </div>
                 
@@ -42,36 +34,24 @@ export default function Footer() {
                             <b>Company</b>    
                         </h6>
                         <div className="mt-25 footer-nav">
-                            <Link to="/upport.php" className="white-text"><h6>Help & support</h6> </Link>
-                            <Link to="/erms.php" className="white-text"><h6>Terms of use</h6> </Link>
-                            <Link to="/upport.php" className="white-text"><h6>Contact Us</h6> </Link>
-                            <Link to="/erms.php" className="white-text"><h6>Privacy</h6> </Link>
+                            <Link to="/" className="white-text"><h6>Help & support</h6> </Link>
+                            <Link to="/" className="white-text"><h6>Terms of use</h6> </Link>
+                            <Link to="/" className="white-text"><h6>Contact Us</h6> </Link>
+                            <Link to="/" className="white-text"><h6>Privacy</h6> </Link>
                         </div>
                     </div>
                     <div className="col s12 m4">
                         <h6 className="white-text" style={{fontSize:"25px"}}> <b>Courses</b>  </h6>
                         <div className="mt-25 footer-nav">
-                            <Link to="/ingle-course.php" className="white-text"><h6>Public finance</h6> </Link>
-                            <Link to="/ingle-course.php" className="white-text"><h6>Business finance</h6> </Link>
+                            <Link to="/" className="white-text"><h6>Public finance</h6> </Link>
+                            <Link to="/" className="white-text"><h6>Business finance</h6> </Link>
                         
                         </div>
                     </div>
                 </div>
                 <div className="col m3  s12 mt-50 hide-on-med-and-down">
                     <h6 className="white-text" > Subscribe to mailing list </h6>
-                    <input className="subscibe-input mt-50" placeholder="Email address" type="text"
-                                style={{
-                                    fontSize: "15px !important",
-                                    border: "1px solid #eee",
-                                    width: "250px",
-                                    padding: "2px 8px",
-                                    borderRadius: "5px",
-                                    color:"#eee!important"
-                                }} />
-                    <button className="btn-flat  btn-primary transparent waves-effect waves-light btn modal-trigger"
-                        style={{
-                            height:"45px",borderRadius:"8px"
-                        }}>Subcribe now !</button>
+                    <Subscribe />
                     
                 </div>
                 <div className="col s12  m3 show-on-medium-and-down hide-on-med-and-up">

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import MobileSidebar from './MobileSidebar'
+
 export default function Header() {
     return (
 
@@ -15,7 +17,8 @@ export default function Header() {
             }} alt="" />
         </Link>
         <Link to="#" data-target="mobile-demo" className="sidenav-trigger">
-            <i className="material-icons white-text">menu</i>
+                        {/* <i className="material-icons white-text">menu</i> */}
+            <MobileSidebar />
         </Link>
         <ul className="right " style={{height:"53px"}}>
             <li className="">
